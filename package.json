@@ -1,16 +1,45 @@
 {
-    "name": "gitbook-plugin-websequencediagrams-generator",
-    "version": "0.0.1",
-    "description": "GitBook plugin to render diagrams via the websequencediagrams API",
-    "engines": {
-        "gitbook": ">1.x.x"
-    },
-    "main": "index.js",
-    "homepage": "https://github.com/onegini/gitbook-plugin-websequencediagrams",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/onegini/gitbook-plugin-websequencediagrams.git"
-    },
-    "license": "Apache-2.0",
-    "keywords": ["gitbook", "websequencediagrams"]
+  "name": "gitbook-plugin-websequencediagrams-generator",
+  "version": "0.0.1",
+  "description": "GitBook plugin to render diagrams via the websequencediagrams API",
+  "engines": {
+    "gitbook": "2.x.x"
+  },
+  "gitbook": {
+    "properties": {
+      "directory": {
+        "type": "string",
+        "default": "/diagrams",
+        "description": "The directory where the images are saved"
+      },
+      "prefix": {
+        "type": "string",
+        "default": "diagram-",
+        "description": "Filename prefix for the images"
+      }
+    }
+  },
+  "main": "index.js",
+  "homepage": "https://github.com/onegini/gitbook-plugin-websequencediagrams",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/onegini/gitbook-plugin-websequencediagrams.git"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "gitbook",
+    "websequencediagrams"
+  ],
+  "devDependencies": {
+    "gitbook-plugin": "0.0.2"
+  },
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "mkdirp": "^0.5.1",
+    "path": "^0.12.7",
+    "q": "^1.4.1",
+    "require": "^2.4.20",
+    "util": "^0.10.3",
+    "websequencediagrams": "0.0.2"
+  }
 }

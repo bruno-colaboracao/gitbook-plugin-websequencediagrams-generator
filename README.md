@@ -3,12 +3,12 @@ websequencediagrams.com integration for GitBook
 
 ### 1. You can use install it via **NPM** and save it to package.json:
 ```
-$ npm install gitbook-plugin-websequencediagrams --save
+$ npm install gitbook-plugin-websequencediagrams-generator --save
 ```
 ### 2. add the plugin to `book.json` config
 ```
 {
-    "plugins": [ "websequencediagrams"]
+    "plugins": [ "websequencediagrams-generator"]
 }
 ```
 ### 3. paste websequencediagrams.com text into your book, for example:
