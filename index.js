@@ -11,12 +11,12 @@ var book, config, pluginConfig;
 // A subscription is required for PDF or SVG
 var IMAGE_TYPE = 'png';
 
-function renderPlainText(text) {
-  return format('<pre>%s</pre>', text);
-}
+function createDirectory() {
+  var directory = path.join(config.output, pluginConfig['directory']);
 
-function renderImage(fileName, description) {
-  return format('<img src="%s" alt="%s"/>', fileName, description.trim());
+  if (!fs.existsSync(directory)) {
+    mkdirp(directory);
+  }
 }
 
 function getFileName() {
@@ -26,13 +26,43 @@ function getFileName() {
 
   return format('%s/%s%s.%s', directory, prefix, suffix, IMAGE_TYPE);
 }
-function createDirectory() {
-  var directory = path.join(config.output, pluginConfig['directory']);
 
-  if (!fs.existsSync(directory)) {
-    mkdirp(directory);
-  }
+function getDiagramData(description, style) {
+  return Q.Promise(function (resolve, reject) {
+    wsd.diagram(description, style, IMAGE_TYPE, function (error, buffer, type) {
+      if (error) {
+        reject(new Error(error));
+      } else {
+        resolve(buffer, type);
+      }
+    })
+  });
 }
+
+function writeImage(buffer) {
+  return Q.Promise(function (resolve, reject) {
+    var fileName = getFileName();
+    fs.writeFile(path.join(config.output, fileName), buffer, {}, function (error) {
+      if (error) {
+        reject(new Error(error));
+      } else {
+        resolve(fileName);
+      }
+    })
+  });
+}
+
+function renderPlainText(text) {
+  return Q.resolve(format('<pre>%s</pre>', text));
+}
+
+function renderImage(fileName, description) {
+  var diagramTitleExp = new RegExp(/(title )(.*?\n)/, 'i');
+  var match = description.match(diagramTitleExp);
+  var altText = match == null || match.length < 3 ? '' : match[2].trim();
+  return Q.resolve(format('<img src="%s" alt="%s"/>', fileName, altText));
+}
+
 module.exports = {
   hooks: {
     "init": function () {
@@ -48,32 +78,18 @@ module.exports = {
   blocks: {
     websd: {
       process: function (block) {
-
-        var deferred = Q.defer();
-
-        var style = block.kwargs['style'] || 'default';
         var description = block.body;
+        var style = block.kwargs['style'] || 'default';
 
-        wsd.diagram(description, style, IMAGE_TYPE, function (er, buf, typ) {
-          if (er) {
-            console.error(er);
-            deferred.reject(renderPlainText(description));
-          } else {
-            var fileName = getFileName();
-            fs.writeFile(path.join(config.output, fileName), buf, {}, function (fileError) {
-              if (fileError) {
-                console.error(er);
-                deferred.reject(renderPlainText(description));
-              } else {
-                deferred.resolve(renderImage(fileName, description));
-              }
-            });
-          }
-        });
-
-        return deferred.promise;
+        return getDiagramData(description, style)
+          .then(writeImage)
+          .then(function (fileName) {
+            return renderImage(fileName, description);
+          }).catch(function (error) {
+            console.error(error);
+            return renderPlainText(description);
+          });
       }
     }
   }
-
 };
