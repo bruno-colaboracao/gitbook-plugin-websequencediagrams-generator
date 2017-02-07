@@ -21,10 +21,10 @@ function createDirectory() {
 
 function generateFilePath() {
   var directory = pluginConfig['directory'];
-  var prefix = pluginConfig['prefix'];
+  var imagePrefix = pluginConfig['image-prefix'];
   var suffix = Math.random().toString(36).substring(10);
 
-  return format('%s/%s%s.%s', directory, prefix, suffix, IMAGE_TYPE);
+  return format('%s/%s%s.%s', directory, imagePrefix, suffix, IMAGE_TYPE);
 }
 
 function getDiagramData(definition, style) {

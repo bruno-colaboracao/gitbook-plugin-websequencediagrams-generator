@@ -12,7 +12,7 @@
         "default": "/diagrams",
         "description": "The directory where the images are saved"
       },
-      "prefix": {
+      "image-prefix": {
         "type": "string",
         "default": "diagram-",
         "description": "Filename prefix for the images"
