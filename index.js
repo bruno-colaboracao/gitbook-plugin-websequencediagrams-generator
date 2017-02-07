@@ -19,7 +19,7 @@ function createDirectory() {
   }
 }
 
-function getFileName() {
+function generateFilePath() {
   var directory = pluginConfig['directory'];
   var prefix = pluginConfig['prefix'];
   var suffix = Math.random().toString(36).substring(10);
@@ -27,9 +27,9 @@ function getFileName() {
   return format('%s/%s%s.%s', directory, prefix, suffix, IMAGE_TYPE);
 }
 
-function getDiagramData(description, style) {
+function getDiagramData(definition, style) {
   return Q.Promise(function (resolve, reject) {
-    wsd.diagram(description, style, IMAGE_TYPE, function (error, buffer, type) {
+    wsd.diagram(definition, style, IMAGE_TYPE, function (error, buffer, type) {
       if (error) {
         reject(new Error(error));
       } else {
@@ -41,12 +41,13 @@ function getDiagramData(description, style) {
 
 function writeImage(buffer) {
   return Q.Promise(function (resolve, reject) {
-    var fileName = getFileName();
-    fs.writeFile(path.join(config.output, fileName), buffer, {}, function (error) {
+    var relativePath = generateFilePath();
+
+    fs.writeFile(path.join(config.output, relativePath), buffer, {}, function (error) {
       if (error) {
         reject(new Error(error));
       } else {
-        resolve(fileName);
+        resolve(relativePath);
       }
     })
   });
@@ -56,11 +57,11 @@ function renderPlainText(text) {
   return Q.resolve(format('<pre>%s</pre>', text));
 }
 
-function renderImage(fileName, description) {
+function renderImage(filePath, definition) {
   var diagramTitleExp = new RegExp(/(title )(.*?\n)/, 'i');
-  var match = description.match(diagramTitleExp);
+  var match = definition.match(diagramTitleExp);
   var altText = match == null || match.length < 3 ? '' : match[2].trim();
-  return Q.resolve(format('<img src="%s" alt="%s"/>', fileName, altText));
+  return Q.resolve(format('<img src="%s" alt="%s"/>', filePath, altText));
 }
 
 module.exports = {
@@ -78,16 +79,16 @@ module.exports = {
   blocks: {
     websd: {
       process: function (block) {
-        var description = block.body;
+        var definition = block.body;
         var style = block.kwargs['style'] || 'default';
 
-        return getDiagramData(description, style)
+        return getDiagramData(definition, style)
           .then(writeImage)
-          .then(function (fileName) {
-            return renderImage(fileName, description);
+          .then(function (filePath) {
+            return renderImage(filePath, definition);
           }).catch(function (error) {
             console.error(error);
-            return renderPlainText(description);
+            return renderPlainText(definition);
           });
       }
     }
