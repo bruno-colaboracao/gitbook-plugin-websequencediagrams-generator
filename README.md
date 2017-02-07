@@ -25,9 +25,9 @@ Bob->Alice: Authentication Response
 {% endwebsd %}
 ```
 
-The style parameter is optional, and defaults to "default" if not set
+The style parameter is optional, and defaults to "default" if not set.
 
 ## Optional configuration
 
 * `websequencediagrams-generator-directory`: The directory where the images are saved. Default value: `diagrams`.
-* `websequencediagrams-generator-image-prefix`: Filename prefix of the generated images. Default value: `diagram-`
+* `websequencediagrams-generator-image-prefix`: Filename prefix of the generated images. Default value: `diagram-`.
