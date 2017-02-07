@@ -4,7 +4,7 @@ This plugin retrieves the diagram as image when the Gitbook is built.
 
 ## Install plugin as npm dependency
 ```bash
-$ npm install gitbook-plugin-websequencediagrams-generator --save
+npm install gitbook-plugin-websequencediagrams-generator --save
 ```
 
 ## Add the plugin to `book.json` config
