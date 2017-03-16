@@ -1,6 +1,6 @@
 {
   "name": "gitbook-plugin-websequencediagrams-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "GitBook plugin to render diagrams via the websequencediagrams API",
   "engines": {
     "gitbook": "2.x.x"
