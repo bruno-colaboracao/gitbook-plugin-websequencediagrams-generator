@@ -40,6 +40,6 @@
     "q": "^1.4.1",
     "require": "^2.4.20",
     "util": "^0.10.3",
-    "websequencediagrams": "0.0.2"
+    "websequencediagrams": "https://github.com/Onegini/node-websequencediagrams/archive/v0.0.3.tar.gz"
   }
 }
