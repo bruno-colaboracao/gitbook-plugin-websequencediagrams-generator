@@ -58,10 +58,12 @@ function renderPlainText(text) {
 }
 
 function renderImage(filePath, definition) {
-  var diagramTitleExp = new RegExp(/(title )(.*?\n)/, 'i');
-  var match = definition.match(diagramTitleExp);
-  var altText = match == null || match.length < 3 ? '' : match[2].trim();
-  return Q.resolve(format('<img src="%s" alt="%s"/>', filePath, altText));
+  return Q.Promise(function (resolve) {
+    var diagramTitleExp = /(title )(.*?\n)/i;
+    var match = definition.match(diagramTitleExp);
+    var altText = match == null || match.length < 3 ? '' : match[2].trim();
+    resolve(format('<img src="%s" alt="%s"/>', filePath, altText));
+  });
 }
 
 module.exports = {
@@ -87,7 +89,7 @@ module.exports = {
           .then(function (filePath) {
             return renderImage(filePath, definition);
           }).catch(function (error) {
-            console.error(error);
+            console.error("An error is thrown, will render the websequencediagram as plain text", error);
             return renderPlainText(definition);
           });
       }
