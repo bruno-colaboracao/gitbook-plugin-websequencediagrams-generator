@@ -30,16 +30,19 @@
     "gitbook",
     "websequencediagrams"
   ],
+  "scripts": {
+    "test": "node test/test.js"
+  },
   "devDependencies": {
     "gitbook-plugin": "0.0.2"
   },
   "dependencies": {
+    "@onegini/websequencediagrams": "0.0.5",
     "fs": "0.0.1-security",
     "mkdirp": "^0.5.1",
     "path": "^0.12.7",
     "q": "^1.4.1",
     "require": "^2.4.20",
-    "util": "^0.10.3",
-    "websequencediagrams": "https://github.com/Onegini/node-websequencediagrams/archive/v0.0.3.tar.gz"
+    "util": "^0.10.3"
   }
 }

@@ -3,7 +3,7 @@ var mkdirp = require('mkdirp');
 var fs = require('fs');
 var path = require('path');
 var format = require('util').format;
-var wsd = require('websequencediagrams');
+var wsd = require('@onegini/websequencediagrams');
 var console = require('console');
 
 var book, config, pluginConfig;
