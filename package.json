@@ -37,7 +37,7 @@
     "gitbook-plugin": "0.0.2"
   },
   "dependencies": {
-    "@onegini/websequencediagrams": "0.0.5",
+    "@onegini/websequencediagrams": "0.0.6",
     "fs": "0.0.1-security",
     "mkdirp": "^0.5.1",
     "path": "^0.12.7",
