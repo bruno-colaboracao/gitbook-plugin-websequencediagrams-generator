@@ -1,8 +1,14 @@
 # Changelog
 
+## 1.0.5
+
+Date: 10-02-2020
+
+Access the websequencediagrams api via https.
+
 ## 1.0.4
 
-Date: 12-09-2018
+Date: 12-09-2019
 
 The API response of websequencediagrams.com has changed.
 

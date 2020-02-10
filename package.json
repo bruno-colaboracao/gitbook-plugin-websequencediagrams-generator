@@ -3,7 +3,8 @@
   "version": "1.0.4",
   "description": "GitBook plugin to render diagrams via the websequencediagrams API",
   "engines": {
-    "gitbook": "2.x.x"
+    "gitbook": "2.x.x",
+    "node": "<= 6"
   },
   "gitbook": {
     "properties": {
@@ -37,7 +38,7 @@
     "gitbook-plugin": "0.0.2"
   },
   "dependencies": {
-    "@onegini/websequencediagrams": "0.0.6",
+    "@onegini/websequencediagrams": "0.0.7",
     "fs": "0.0.1-security",
     "mkdirp": "^0.5.1",
     "path": "^0.12.7",
