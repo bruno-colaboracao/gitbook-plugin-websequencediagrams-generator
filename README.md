@@ -5,11 +5,13 @@ This plugin retrieves the diagram as image when the Gitbook is built.
 ## Adding the plugin to a Gitbook project
 
 ### Install plugin as npm dependency
+
 ```bash
 npm install gitbook-plugin-websequencediagrams-generator --save
 ```
 
 ### Add the plugin to `book.json` config
+
 ```json
 {
     "plugins": [ "websequencediagrams-generator"]
@@ -24,6 +26,7 @@ npm install gitbook-plugin-websequencediagrams-generator --save
 ## Using the plugin
 
 Add a fragment in the [syntax of websequencediagrams.com](https://www.websequencediagrams.com/examples.html) to your book, for example:
+
 ```
 {% websd style="rose" %}
 title Authentication Sequence
