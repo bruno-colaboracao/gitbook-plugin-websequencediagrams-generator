@@ -2,6 +2,7 @@ var Q = require('q');
 var mkdirp = require('mkdirp');
 var fs = require('fs');
 var path = require('path');
+
 var format = require('util').format;
 var wsd = require('@onegini/websequencediagrams');
 var console = require('console');
@@ -42,8 +43,7 @@ function getDiagramData(definition, style) {
 function writeImage(buffer) {
   return Q.Promise(function (resolve, reject) {
     var relativePath = generateFilePath();
-
-    fs.writeFile(path.join(config.output, relativePath), buffer, {}, function (error) {
+    fs.writeFile(book.output.root()+relativePath, buffer, {}, function (error) {
       if (error) {
         reject(new Error(error));
       } else {
