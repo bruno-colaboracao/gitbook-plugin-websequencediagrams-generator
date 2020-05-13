@@ -1,9 +1,9 @@
 {
   "name": "gitbook-plugin-websequencediagrams-generator",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "GitBook plugin to render diagrams via the websequencediagrams API",
   "engines": {
-    "gitbook": "2.x.x",
+    "gitbook": ">= 2.x.x",
     "node": "<= 6"
   },
   "gitbook": {
